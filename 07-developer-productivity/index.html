@@ -1,0 +1,1871 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The complete study guide to GitHub's AI developer certifications — GH-300 & GH-600">
+      
+      
+        <meta name="author" content="Sébastien Brochet">
+      
+      
+        <link rel="canonical" href="https://sebbrochet.github.io/ghcertifications/07-developer-productivity/">
+      
+      
+        <link rel="prev" href="../06-copilot-advanced-capabilities/">
+      
+      
+        <link rel="next" href="../08-administering-copilot/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>7. Boosting Developer Productivity - Copilot to Agents</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-7-boosting-developer-productivity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Copilot to Agents" class="md-header__button md-logo" aria-label="Copilot to Agents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Copilot to Agents
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7. Boosting Developer Productivity
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Copilot to Agents" class="md-nav__button md-logo" aria-label="Copilot to Agents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Copilot to Agents
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../downloads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downloads (PDF & EPUB)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — AI foundations for developers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — AI foundations for developers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-generative-ai-for-developers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Understanding Generative AI for Developers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-how-github-copilot-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. How GitHub Copilot Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-prompt-engineering-and-context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Prompt Engineering & Context Crafting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-using-ai-responsibly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Using AI Responsibly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — GH-300 track: Working with GitHub Copilot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — GH-300 track: Working with GitHub Copilot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-copilot-in-ide-and-cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Copilot in the IDE and CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-copilot-advanced-capabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Copilot Capabilities: Agent Mode, Edits, MCP, Code Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Boosting Developer Productivity
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Boosting Developer Productivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-30-seconds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In 30 seconds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exam-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exam map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Key concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Key concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-copilot-helps-most" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where Copilot helps most
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-generation-edge-cases-and-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing: generation, edge cases, and assertions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-and-performance-suggestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security and performance suggestions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generation-refactoring-and-documentation-in-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generation, refactoring, and documentation in practice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-sample-data-and-modernizing-legacy-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generating sample data and modernizing legacy code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-in-the-real-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. In the real world
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-exam-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Exam tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-practice-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Practice questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further reading
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-administering-copilot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Administering Copilot: Plans, Policies & Safeguards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — GH-600 track: Developing agentic AI systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — GH-600 track: Developing agentic AI systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-agent-architecture-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Agent Architecture & SDLC Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-tool-use-and-mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Tool Use & Environment Interaction (MCP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-memory-state-execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Memory, State & Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-evaluation-error-analysis-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Evaluation, Error Analysis & Tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Multi-Agent Orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-guardrails-and-accountability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Guardrails & Accountability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Exam readiness
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Exam readiness
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-gh-300-exam-readiness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. GH-300 Exam Readiness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-gh-600-exam-readiness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. GH-600 Exam Readiness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Annexes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-annexe-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-annexe-product-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Product & feature reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-annexe-objective-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. Objective-to-chapter map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-annexe-further-resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Further resources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-30-seconds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In 30 seconds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exam-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exam map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Key concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Key concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-copilot-helps-most" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where Copilot helps most
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-generation-edge-cases-and-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing: generation, edge cases, and assertions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-and-performance-suggestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security and performance suggestions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generation-refactoring-and-documentation-in-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generation, refactoring, and documentation in practice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-sample-data-and-modernizing-legacy-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generating sample data and modernizing legacy code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-in-the-real-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. In the real world
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-exam-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Exam tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-practice-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Practice questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further reading
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!-- markdownlint-disable MD041 -->
+<h1 id="chapter-7-boosting-developer-productivity">Chapter 7 — Boosting Developer Productivity<a class="headerlink" href="#chapter-7-boosting-developer-productivity" title="Permanent link">&para;</a></h1>
+<p><em>Part II — GH-300 track: Working with GitHub Copilot</em></p>
+<hr />
+<h2 id="in-30-seconds">In 30 seconds<a class="headerlink" href="#in-30-seconds" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>The core idea</strong>: Copilot accelerates the everyday loop — generating, refactoring, documenting, testing,
+  and hardening code — while you steer and verify.</li>
+<li><strong>Why it matters</strong>: productivity is the whole point of the tool, and GH-300 tests concrete use cases.</li>
+<li><strong>The exam angle</strong>: GH-300 tests <strong>code generation, refactoring, documentation</strong>; <strong>accelerating learning
+  and reducing context switching</strong>; <strong>sample data and legacy modernization</strong>; <strong>unit/integration tests,
+  edge cases, assertions</strong>; and <strong>security improvements and performance optimizations</strong>.</li>
+<li><strong>Remember</strong>: Copilot drafts; tests and review confirm.</li>
+</ul>
+<hr />
+<h2 id="exam-map">Exam map<a class="headerlink" href="#exam-map" title="Permanent link">&para;</a></h2>
+<p><strong>Exam map — GH-300 · Improve developer productivity with GitHub Copilot</strong></p>
+<hr />
+<h2 id="1-key-concepts">1. Key concepts<a class="headerlink" href="#1-key-concepts" title="Permanent link">&para;</a></h2>
+<p>Everything so far — how the model works, how to prompt it, which surface to use — exists to make you faster
+and your code better. GH-300 tests concrete productivity use cases directly, and they cluster into a simple
+loop: Copilot <strong>drafts</strong>, you <strong>verify</strong>. This chapter is a tour of where that loop pays off across the
+development lifecycle.</p>
+<blockquote>
+<p>📌 <strong>Key concept</strong>: Copilot's productivity gains are real but conditional. They show up when you use it
+for the right tasks — boilerplate, tests, docs, translation, exploration — and keep a human validating the
+output (Chapter 4). Speed without verification is just faster bugs.</p>
+</blockquote>
+<h3 id="where-copilot-helps-most">Where Copilot helps most<a class="headerlink" href="#where-copilot-helps-most" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Code generation</strong> — scaffolding, boilerplate, well-known algorithms, repetitive patterns.</li>
+<li><strong>Refactoring</strong> — extracting functions, renaming, restructuring, applying a pattern consistently.</li>
+<li><strong>Documentation</strong> — docstrings, README sections, inline comments, usage examples.</li>
+<li><strong>Learning &amp; reduced context switching</strong> — explaining unfamiliar code or APIs <em>in your editor</em> instead of
+  a web search.</li>
+<li><strong>Sample data</strong> — realistic fixtures and seed data in the exact shape you need.</li>
+<li><strong>Legacy modernization</strong> — translating idioms, upgrading patterns, explaining old code before you change it.</li>
+</ul>
+<blockquote>
+<p>📖 <strong>Definition — Context switching</strong>: the productivity cost of leaving your task to look something up
+elsewhere. By answering questions and generating examples in place, Copilot reduces these switches — a
+significant, if hard-to-measure, gain.</p>
+</blockquote>
+<hr />
+<h2 id="2-how-it-works">2. How it works<a class="headerlink" href="#2-how-it-works" title="Permanent link">&para;</a></h2>
+<h3 id="testing-generation-edge-cases-and-assertions">Testing: generation, edge cases, and assertions<a class="headerlink" href="#testing-generation-edge-cases-and-assertions" title="Permanent link">&para;</a></h3>
+<p>Test support is one of Copilot's highest-value use cases and a named GH-300 objective. Copilot can generate
+<strong>unit and integration tests</strong>, propose <strong>edge cases</strong> you might miss (empty input, boundaries, duplicates,
+nulls, concurrency), and write <strong>assertions</strong> that check the right behavior.</p>
+<blockquote>
+<p>🖥️ <strong>Hands-on</strong>: scope the request and ask for the cases that matter.</p>
+<div class="highlight"><pre><span></span><code>/tests #selection
+Generate unit tests for the selected function. Include: empty input, a single element,
+a very large input, and a malformed record. Use the project's existing test framework
+and assert both the return value and that no exception is thrown for valid input.
+</code></pre></div>
+<p>⚠️ <strong>Pitfall</strong>: a generated test that <em>passes</em> is not automatically a <em>good</em> test. Confirm it asserts the
+intended behavior — Copilot can write a test that locks in a bug.</p>
+</blockquote>
+<h3 id="security-and-performance-suggestions">Security and performance suggestions<a class="headerlink" href="#security-and-performance-suggestions" title="Permanent link">&para;</a></h3>
+<p>Copilot can <strong>suggest security improvements</strong> (parameterized queries instead of string concatenation, input
+validation, safer defaults) and <strong>performance optimizations</strong> (removing needless work in a loop, better data
+structures). Treat these as <em>proposals</em> to validate with review and scanning (Chapter 4), not guarantees.</p>
+<h3 id="generation-refactoring-and-documentation-in-practice">Generation, refactoring, and documentation in practice<a class="headerlink" href="#generation-refactoring-and-documentation-in-practice" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    A["Intent (comment / chat)"] --&gt; B["Copilot drafts&lt;br/&gt;code / tests / docs"]
+    B --&gt; C["You review &amp; run"]
+    C --&gt; D{"Correct &amp; safe?"}
+    D --&gt;|No| E["Refine prompt / edit"]
+    E --&gt; B
+    D --&gt;|Yes| F["Commit"]</code></pre>
+<blockquote>
+<p>🔍 <strong>How it works</strong>: the win comes from <em>drafting speed</em>. Producing a first version of tests, a docstring,
+or a refactor is where most time is spent; Copilot collapses that to seconds, leaving you to do the
+higher-value work of judging and correcting it.</p>
+</blockquote>
+<h3 id="generating-sample-data-and-modernizing-legacy-code">Generating sample data and modernizing legacy code<a class="headerlink" href="#generating-sample-data-and-modernizing-legacy-code" title="Permanent link">&para;</a></h3>
+<p>Need 50 realistic user records as JSON matching a schema? Ask, with two examples (few-shot, Chapter 3).
+Facing a legacy module? Ask Copilot to <strong>explain</strong> it first, then to <strong>modernize</strong> a piece at a time — with
+tests around each change so you can trust the transformation.</p>
+<hr />
+<h2 id="3-in-the-real-world">3. In the real world<a class="headerlink" href="#3-in-the-real-world" title="Permanent link">&para;</a></h2>
+<p><strong>Scenario — a Friday-afternoon refactor.</strong> A developer must extract validation logic duplicated across
+three handlers, add tests, and document the new helper. She asks Copilot to <strong>explain</strong> the current
+duplication, uses <strong>Copilot Edits</strong> to extract a shared <code>validateOrder</code> function across the files, then
+prompts <code>/tests</code> for the helper — explicitly requesting empty-input and boundary cases. Copilot drafts the
+tests; two fail, revealing a real edge case the old code mishandled. She fixes the helper, asks for a
+docstring, and opens a pull request. What would have been an hour of tedium is fifteen minutes of
+judgment — because Copilot did the drafting and she did the verifying.</p>
+<hr />
+<h2 id="4-exam-tips">4. Exam tips<a class="headerlink" href="#4-exam-tips" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>🎯 <strong>Exam tip</strong>: know the productivity use cases by name — <strong>generation, refactoring, documentation,
+tests (with edge cases and assertions), sample data, legacy modernization, security and performance
+suggestions</strong>. GH-300 asks which task Copilot is well suited to.</p>
+<p>🎯 <strong>Exam tip</strong>: the correct framing is always <strong>draft then verify</strong>. Any answer implying Copilot's
+tests or security fixes can be trusted without review is wrong.</p>
+<p>🎯 <strong>Exam tip</strong>: "reducing context switching" and "accelerating learning" are legitimate, tested benefits
+— explaining code in the editor counts.</p>
+</blockquote>
+<hr />
+<h2 id="5-common-pitfalls">5. Common pitfalls<a class="headerlink" href="#5-common-pitfalls" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>⚠️ <strong>Pitfall</strong>: trusting a green test suite Copilot wrote without checking that the assertions are
+meaningful. Passing ≠ correct.</p>
+</blockquote>
+<ul>
+<li><strong>Treating performance/security suggestions as guarantees</strong>: validate with scanning and benchmarks.</li>
+<li><strong>Over-generating</strong>: asking for a huge change in one shot buries errors; work in reviewable steps.</li>
+<li><strong>Skipping the explanation step on legacy code</strong>: understand before you modernize.</li>
+<li><strong>Ignoring the edge cases</strong>: the value of Copilot's test help is largely in the cases you'd have missed —
+  ask for them explicitly.</li>
+</ul>
+<hr />
+<h2 id="6-practice-questions">6. Practice questions<a class="headerlink" href="#6-practice-questions" title="Permanent link">&para;</a></h2>
+<p><strong>1.</strong> Which is the most appropriate, well-suited task for GitHub Copilot?</p>
+<ul>
+<li>A. Guaranteeing that a function is free of all security vulnerabilities.</li>
+<li>B. Generating unit tests and proposing edge cases for a function, which you then review.</li>
+<li>C. Deciding your product roadmap.</li>
+<li>D. Certifying code as production-ready without human review.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Test generation with edge-case suggestions is a core, well-suited use case — followed by
+review. A and D overclaim guarantees; C is outside the tool's role.</p>
+</details>
+<p><strong>2.</strong> A generated unit test passes on the first run. What should you do before relying on it?</p>
+<ul>
+<li>A. Nothing — a passing test is always correct.</li>
+<li>B. Verify the test actually asserts the intended behavior and covers meaningful cases.</li>
+<li>C. Delete your other tests.</li>
+<li>D. Increase the temperature.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> A passing test can still assert the wrong thing (even lock in a bug). A is unsafe; C and D
+are irrelevant.</p>
+</details>
+<p><strong>3.</strong> How does Copilot most directly reduce context switching?</p>
+<ul>
+<li>A. By training a model on your browser history.</li>
+<li>B. By explaining unfamiliar code and generating examples in the editor, so you don't leave to search.</li>
+<li>C. By blocking access to the internet.</li>
+<li>D. By disabling other extensions.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Answering questions and producing examples in place keeps you in flow. A, C, and D don't
+describe how Copilot works.</p>
+</details>
+<p><strong>4.</strong> You need to modernize a poorly understood legacy module. What is the best first step with Copilot?</p>
+<ul>
+<li>A. Ask it to rewrite the whole module at once with no tests.</li>
+<li>B. Ask it to explain the module, then modernize incrementally with tests around each change.</li>
+<li>C. Delete the module and hope for the best.</li>
+<li>D. Ask it to guarantee the rewrite is bug-free.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Understand first, then change in small, verified steps. A is risky; C is reckless; D expects
+a guarantee Copilot can't give.</p>
+</details>
+<p><strong>5.</strong> Copilot suggests replacing a string-concatenated SQL query with a parameterized one. How should you
+treat this?</p>
+<ul>
+<li>A. As a guaranteed fix requiring no further checks.</li>
+<li>B. As a helpful security <em>suggestion</em> to review, test, and scan before shipping.</li>
+<li>C. As irrelevant to security.</li>
+<li>D. As a reason to skip code review.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> It's a good suggestion, but it's still validated like any change. A and D drop verification;
+C is wrong — it's a genuine security improvement.</p>
+</details>
+<hr />
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Chapter 4 — Using AI Responsibly</strong>: why every productivity gain is paired with validation.</li>
+<li><strong>Chapter 6 — Copilot Capabilities</strong>: agent mode and Copilot Edits for larger, tool-verified changes.</li>
+</ul>
+<blockquote>
+<p>🔗 <strong>Source</strong>: <a href="https://learn.microsoft.com/training/modules/develop-unit-tests-using-github-copilot-tools/">Develop unit tests using GitHub Copilot tools (Microsoft Learn)</a></p>
+<p>🔗 <strong>Source</strong>: <a href="https://learn.microsoft.com/training/modules/developer-use-cases-for-ai-with-github-copilot/">Developer use cases for AI with GitHub Copilot (Microsoft Learn)</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1856 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The complete study guide to GitHub's AI developer certifications — GH-300 & GH-600">
+      
+      
+        <meta name="author" content="Sébastien Brochet">
+      
+      
+        <link rel="canonical" href="https://sebbrochet.github.io/ghcertifications/14-guardrails-and-accountability/">
+      
+      
+        <link rel="prev" href="../13-multi-agent-orchestration/">
+      
+      
+        <link rel="next" href="../15-gh-300-exam-readiness/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>14. Guardrails & Accountability - Copilot to Agents</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-14-guardrails-accountability" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Copilot to Agents" class="md-header__button md-logo" aria-label="Copilot to Agents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Copilot to Agents
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              14. Guardrails & Accountability
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Copilot to Agents" class="md-nav__button md-logo" aria-label="Copilot to Agents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Copilot to Agents
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../downloads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downloads (PDF & EPUB)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I — AI foundations for developers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I — AI foundations for developers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-generative-ai-for-developers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Understanding Generative AI for Developers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-how-github-copilot-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. How GitHub Copilot Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-prompt-engineering-and-context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Prompt Engineering & Context Crafting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-using-ai-responsibly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Using AI Responsibly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II — GH-300 track: Working with GitHub Copilot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II — GH-300 track: Working with GitHub Copilot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-copilot-in-ide-and-cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Copilot in the IDE and CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-copilot-advanced-capabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Copilot Capabilities: Agent Mode, Edits, MCP, Code Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-developer-productivity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Boosting Developer Productivity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-administering-copilot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Administering Copilot: Plans, Policies & Safeguards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III — GH-600 track: Developing agentic AI systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III — GH-600 track: Developing agentic AI systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-agent-architecture-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Agent Architecture & SDLC Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-tool-use-and-mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Tool Use & Environment Interaction (MCP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-memory-state-execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Memory, State & Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-evaluation-error-analysis-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Evaluation, Error Analysis & Tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Multi-Agent Orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Guardrails & Accountability
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Guardrails & Accountability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-30-seconds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In 30 seconds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exam-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exam map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Key concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Key concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classify-by-risk-then-right-size-autonomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classify by risk, then right-size autonomy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#human-in-the-loop-where-judgment-is-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Human-in-the-loop where judgment is needed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#githubs-built-in-guardrails-a-concrete-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub's built-in guardrails (a concrete model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accountability-traceable-by-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accountability: traceable by design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-in-the-real-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. In the real world
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-exam-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Exam tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-practice-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Practice questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further reading
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV — Exam readiness
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV — Exam readiness
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-gh-300-exam-readiness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. GH-300 Exam Readiness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-gh-600-exam-readiness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. GH-600 Exam Readiness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Annexes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-annexe-glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-annexe-product-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Product & feature reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-annexe-objective-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. Objective-to-chapter map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-annexe-further-resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Further resources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-30-seconds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In 30 seconds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exam-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exam map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Key concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Key concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classify-by-risk-then-right-size-autonomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classify by risk, then right-size autonomy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#human-in-the-loop-where-judgment-is-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Human-in-the-loop where judgment is needed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#githubs-built-in-guardrails-a-concrete-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub's built-in guardrails (a concrete model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accountability-traceable-by-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accountability: traceable by design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-in-the-real-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. In the real world
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-exam-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Exam tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-practice-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Practice questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Further reading
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!-- markdownlint-disable MD041 -->
+<h1 id="chapter-14-guardrails-accountability">Chapter 14 — Guardrails &amp; Accountability<a class="headerlink" href="#chapter-14-guardrails-accountability" title="Permanent link">&para;</a></h1>
+<p><em>Part III — GH-600 track: Developing agentic AI systems</em></p>
+<hr />
+<h2 id="in-30-seconds">In 30 seconds<a class="headerlink" href="#in-30-seconds" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>The core idea</strong>: right-size autonomy by classifying actions by risk, insert human judgment only where it
+  matters, block policy violations, and enforce least privilege — without killing velocity.</li>
+<li><strong>Why it matters</strong>: guardrails are what make autonomous agents safe to run in production.</li>
+<li><strong>The exam angle</strong>: GH-600 tests <strong>classifying actions by operational/security/compliance risk</strong>,
+  <strong>assigning autonomy levels</strong>, <strong>human-in-the-loop for high-judgment actions</strong>, <strong>blocking
+  policy-violating actions</strong>, <strong>least-privilege scoping</strong>, <strong>explicit authorization for irreversible
+  changes</strong>, and <strong>preserving velocity by minimizing low-value approvals</strong>.</li>
+<li><strong>Remember</strong>: match the control to the risk — approve the irreversible, automate the safe.</li>
+</ul>
+<hr />
+<h2 id="exam-map">Exam map<a class="headerlink" href="#exam-map" title="Permanent link">&para;</a></h2>
+<p><strong>Exam map — GH-600 · Implement guardrails and accountability</strong></p>
+<hr />
+<h2 id="1-key-concepts">1. Key concepts<a class="headerlink" href="#1-key-concepts" title="Permanent link">&para;</a></h2>
+<p>Everything in the GH-600 track converges here: guardrails are what make autonomous agents <em>safe to run in
+production</em>. The discipline is to <strong>match the control to the risk</strong> — automate the safe and reversible,
+require human judgment for the risky and irreversible — without drowning delivery in needless approvals.
+This is the responsible-AI thinking of Chapter 4, now enforced on agents.</p>
+<blockquote>
+<p>📖 <strong>Definition — Guardrail</strong>: a constraint that limits what an agent may do — a permission boundary, a
+required approval, a blocked action, an execution scope. Guardrails turn "the agent can do anything" into
+"the agent can do exactly what's safe."</p>
+<p>📖 <strong>Definition — Autonomy level</strong>: the degree of independent action granted to an agent for a class of
+actions. You <strong>classify actions by risk</strong> — operational, security, compliance — and assign an autonomy
+level that maximizes delivery speed while staying within security and Responsible AI standards.</p>
+</blockquote>
+<h3 id="classify-by-risk-then-right-size-autonomy">Classify by risk, then right-size autonomy<a class="headerlink" href="#classify-by-risk-then-right-size-autonomy" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>📌 <strong>Key concept</strong>: not all actions deserve the same scrutiny. Reading an issue is low risk; deploying to
+production is high and irreversible. Classify each action by <strong>operational, security, and compliance
+risk</strong>, then apply the <em>lightest</em> control that adequately manages it. Uniform approvals are an
+anti-pattern — they slow everything without reducing the risks that matter.</p>
+</blockquote>
+<hr />
+<h2 id="2-how-it-works">2. How it works<a class="headerlink" href="#2-how-it-works" title="Permanent link">&para;</a></h2>
+<h3 id="human-in-the-loop-where-judgment-is-needed">Human-in-the-loop where judgment is needed<a class="headerlink" href="#human-in-the-loop-where-judgment-is-needed" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>📖 <strong>Definition — Human-in-the-loop (HITL)</strong>: a checkpoint requiring explicit human approval before the
+agent proceeds. Reserve HITL for the subset of actions that genuinely need judgment or are irreversible/
+compliance-sensitive; automate the rest to preserve velocity.</p>
+</blockquote>
+<pre class="mermaid"><code>flowchart TD
+    A["Agent proposes an action"] --&gt; B{"Classify risk"}
+    B --&gt;|Low / reversible| C["Auto-execute"]
+    B --&gt;|High / irreversible /&lt;br/&gt;compliance-sensitive| D["Require human authorization"]
+    B --&gt;|Violates policy| E["Block"]</code></pre>
+<h3 id="githubs-built-in-guardrails-a-concrete-model">GitHub's built-in guardrails (a concrete model)<a class="headerlink" href="#githubs-built-in-guardrails-a-concrete-model" title="Permanent link">&para;</a></h3>
+<p>GitHub's coding agent is a worked example of these principles — and a rich exam source:</p>
+<ul>
+<li><strong>Least privilege &amp; scope</strong>: only users with <strong>write access</strong> can trigger it; it pushes to a <strong>single
+  branch</strong> (a <code>copilot/</code> branch or the PR branch) subject to branch protections; its credentials allow only
+  <strong>simple push</strong>, not arbitrary <code>git</code>.</li>
+<li><strong>HITL for the irreversible</strong>: it opens <strong>draft</strong> PRs it <strong>cannot</strong> mark ready, approve, or merge — a
+  human must review and merge. <strong>GitHub Actions workflows don't run</strong> until a user with write access
+  approves them.</li>
+<li><strong>Separation of duties</strong>: the person who asked the agent for a PR <strong>can't approve it</strong>, preserving
+  required-approval rules; an <strong>extra approval</strong> is required when a PR <strong>isn't attributed to a person</strong>.</li>
+<li><strong>Blocking &amp; containment</strong>: restricted <strong>internet access</strong> limits exfiltration; <strong>hidden characters are
+  filtered</strong> to mitigate <strong>prompt injection</strong>.</li>
+<li><strong>Built-in validation</strong>: <strong>CodeQL</strong>, <strong>dependency review</strong> against the GitHub Advisory Database, and
+  <strong>secret scanning</strong> run on generated code — no GitHub Advanced Security license required.</li>
+</ul>
+<blockquote>
+<p>📖 <strong>Definition — Least privilege</strong>: granting the minimum permissions and narrowest execution scope an
+action requires. It caps the blast radius of any mistake, bug, or injected instruction.</p>
+</blockquote>
+<h3 id="accountability-traceable-by-design">Accountability: traceable by design<a class="headerlink" href="#accountability-traceable-by-design" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>🔍 <strong>How it works</strong>: guardrails are only half the story; you must be able to answer <em>who did what</em>.
+GitHub makes agent work <strong>accountable</strong>: commits are <strong>authored by Copilot with the requesting developer
+as co-author</strong>, commits are <strong>signed</strong> ("Verified"), and each links to <strong>session logs</strong>, with <strong>audit log
+events</strong> for administrators. Accountability ultimately rests with the humans who configure and approve —
+the agent is never the responsible party (Chapter 4).</p>
+<p>🖥️ <strong>Hands-on</strong>: encode guardrails in the platform, not in hope — branch protection + required reviews,
+the "require approval for unattributed Copilot PRs" ruleset, workflow-approval settings, and a scoped
+tool/MCP allow list (Chapter 10). The agent then <em>cannot</em> exceed policy, regardless of what it "decides."</p>
+</blockquote>
+<hr />
+<h2 id="3-in-the-real-world">3. In the real world<a class="headerlink" href="#3-in-the-real-world" title="Permanent link">&para;</a></h2>
+<p><strong>Scenario — shipping fast, safely.</strong> A team lets an agent fix bugs and open PRs autonomously — a
+low-to-moderate-risk, reversible flow, so no per-step approval. But <strong>deploying</strong> is high-risk and
+irreversible, so it's gated behind <strong>HITL</strong>: the agent may open the release PR, but a human must approve and
+merge, and workflows require write-access approval to run. Because the agent runs with <strong>least privilege</strong> on
+a scoped branch, a prompt-injection attempt in an issue can't escalate — it can't touch <code>main</code>, exfiltrate
+over the network, or run workflows unapproved. Every commit is signed and linked to a session log. The team
+moves quickly on the safe majority of actions and slows down only where it matters.</p>
+<hr />
+<h2 id="4-exam-tips">4. Exam tips<a class="headerlink" href="#4-exam-tips" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>🎯 <strong>Exam tip</strong>: the governing principle is <strong>match the control to the risk</strong> — automate low-risk/
+reversible actions, require <strong>HITL</strong> for high-risk/irreversible/compliance-sensitive ones, and <strong>block</strong>
+policy violations. Uniform approval of everything is wrong (it kills velocity without targeting risk).</p>
+<p>🎯 <strong>Exam tip</strong>: <strong>least privilege</strong> and <strong>scoped execution</strong> are the recurring right answers for
+containing an agent and limiting prompt-injection impact.</p>
+<p>🎯 <strong>Exam tip</strong>: know GitHub's concrete guardrails — <strong>write-access to trigger</strong>, <strong>single-branch push</strong>,
+<strong>draft PRs it can't merge</strong>, <strong>workflows need approval</strong>, <strong>requester can't approve</strong>, <strong>extra approval
+for unattributed PRs</strong>, <strong>restricted internet</strong>, <strong>CodeQL/secret scanning</strong>.</p>
+<p>🎯 <strong>Exam tip</strong>: accountability = <strong>signed, co-authored commits + session logs + audit events</strong>; the
+<strong>human</strong> remains responsible.</p>
+</blockquote>
+<hr />
+<h2 id="5-common-pitfalls">5. Common pitfalls<a class="headerlink" href="#5-common-pitfalls" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>⚠️ <strong>Pitfall</strong>: requiring human approval for <em>every</em> action. It doesn't materially reduce risk for safe
+actions and destroys the velocity that makes agents worthwhile. Approve the irreversible; automate the
+rest.</p>
+</blockquote>
+<ul>
+<li><strong>Over-permissioning</strong>: broad tokens/scope widen the blast radius and injection impact.</li>
+<li><strong>Automating irreversible actions</strong>: deploys, force-pushes, and data deletions need HITL.</li>
+<li><strong>No audit trail</strong>: without signed commits and logs, you can't hold anyone accountable.</li>
+<li><strong>Treating the agent as accountable</strong>: responsibility is always human.</li>
+</ul>
+<hr />
+<h2 id="6-practice-questions">6. Practice questions<a class="headerlink" href="#6-practice-questions" title="Permanent link">&para;</a></h2>
+<p><strong>1.</strong> Which principle should govern how much autonomy you grant an agent for a given action?</p>
+<ul>
+<li>A. Grant full autonomy for everything to maximize speed.</li>
+<li>B. Match the control to the action's risk — automate low-risk/reversible, require human approval for high-risk/irreversible.</li>
+<li>C. Require human approval for every single action.</li>
+<li>D. Base it on the time of day.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Right-size autonomy by risk. A is unsafe; C destroys velocity without targeting risk; D is
+arbitrary.</p>
+</details>
+<p><strong>2.</strong> By default, can GitHub's coding agent merge its own pull request?</p>
+<ul>
+<li>A. Yes, automatically.</li>
+<li>B. No — it opens a draft PR that a human must review and merge; it cannot approve or merge.</li>
+<li>C. Yes, if it passes tests.</li>
+<li>D. Only on weekends.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Human review and merge are required; the agent can't mark ready, approve, or merge. A, C,
+and D are false.</p>
+</details>
+<p><strong>3.</strong> How does least privilege help against prompt injection in an agent?</p>
+<ul>
+<li>A. It prevents the model from ever being wrong.</li>
+<li>B. It limits the blast radius — even a successful injection can only do what the narrow permissions allow.</li>
+<li>C. It disables the agent entirely.</li>
+<li>D. It has no effect on injection.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Minimal permissions cap what any injected instruction can achieve. A overclaims; C is
+extreme; D is false.</p>
+</details>
+<p><strong>4.</strong> A repository requires at least one approval. Why does GitHub prevent the person who asked the agent
+for a PR from approving it?</p>
+<ul>
+<li>A. To slow down that developer specifically.</li>
+<li>B. To preserve separation-of-duties / required-approval controls.</li>
+<li>C. Because approvals are disabled for agents.</li>
+<li>D. Because the agent approves it instead.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Preventing self-approval preserves the expected required-approval controls. A is wrong; C
+and D misstate the behavior.</p>
+</details>
+<p><strong>5.</strong> Which best describes accountability for an autonomous agent's work on GitHub?</p>
+<ul>
+<li>A. The agent is legally responsible for the code.</li>
+<li>B. Work is traceable (signed, co-authored commits; session logs; audit events), and humans remain accountable.</li>
+<li>C. There is no way to tell what the agent did.</li>
+<li>D. Only the model provider is accountable.</li>
+</ul>
+<details>
+<summary>Answer</summary>
+<p><strong>Correct: B.</strong> Agent work is auditable and humans stay responsible. A and D misplace accountability; C is
+false given signed commits and logs.</p>
+</details>
+<hr />
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Chapter 4 — Using AI Responsibly</strong>: the responsible-AI principles guardrails enforce.</li>
+<li><strong>Chapter 10 — Tool Use &amp; Environment Interaction (MCP)</strong>: least privilege, scoping, and allow lists.</li>
+<li><strong>Chapter 9 — Agent Architecture &amp; SDLC Integration</strong>: right-sizing autonomy and human intervention points.</li>
+</ul>
+<blockquote>
+<p>🔗 <strong>Source</strong>: <a href="https://docs.github.com/copilot/concepts/agents/coding-agent/risks-and-mitigations">Risks and mitigations for GitHub Copilot cloud agent</a></p>
+<p>🔗 <strong>Source</strong>: <a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/gh-600">Study guide for Exam GH-600: Developing in Agentic AI Systems</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
