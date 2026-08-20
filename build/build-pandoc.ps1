@@ -39,10 +39,10 @@ if (-not (Get-Command pandoc -ErrorAction SilentlyContinue)) {
 }
 Write-Host "[OK] Pandoc: $(pandoc --version | Select-Object -First 1)" -ForegroundColor Green
 
-# --- Ordered list of chapters (excludes the template `_*.md`) ---
+# --- Ordered list of chapters (excludes the template `_*.md` and the web-only downloads page) ---
 $bookFiles = Get-ChildItem $chapDir -Filter '*.md' |
-    Where-Object { $_.Name -notmatch '^_' } |
-    Sort-Object Name |
+    Where-Object { $_.Name -notmatch '^_' -and $_.Name -ne 'downloads.md' } |
+    Sort-Object { if ($_.Name -eq 'index.md') { '000-index.md' } else { $_.Name } } |
     ForEach-Object { $_.FullName }
 
 if (-not $bookFiles) {

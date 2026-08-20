@@ -68,7 +68,7 @@ plugins:
       lang: en
 
 nav:
-  - Introduction: 00-introduction.md
+  - Introduction: index.md
   - Disclaimer: 00-disclaimer.md
   - Downloads (PDF & EPUB): downloads.md
   - "Part I — AI foundations for developers":
