@@ -1,0 +1,98 @@
+site_name: "Copilot to Agents"
+site_description: "The complete study guide to GitHub's AI developer certifications — GH-300 & GH-600"
+site_author: "Sébastien Brochet"
+site_url: "https://sebbrochet.github.io/ghcertifications/"
+
+# Chapters are the single source of truth: MkDocs reads chapters/ directly.
+docs_dir: chapters
+site_dir: site
+
+# The template is not a page of the book.
+exclude_docs: |
+  _chapter-template.md
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - def_list
+  - footnotes
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - search:
+      lang: en
+
+nav:
+  - Introduction: 00-introduction.md
+  - Disclaimer: 00-disclaimer.md
+  - Downloads (PDF & EPUB): downloads.md
+  - "Part I — AI foundations for developers":
+      - "1. Understanding Generative AI for Developers": 01-generative-ai-for-developers.md
+      - "2. How GitHub Copilot Works": 02-how-github-copilot-works.md
+      - "3. Prompt Engineering & Context Crafting": 03-prompt-engineering-and-context.md
+      - "4. Using AI Responsibly": 04-using-ai-responsibly.md
+  - "Part II — GH-300 track: Working with GitHub Copilot":
+      - "5. Copilot in the IDE and CLI": 05-copilot-in-ide-and-cli.md
+      - "6. Copilot Capabilities: Agent Mode, Edits, MCP, Code Review": 06-copilot-advanced-capabilities.md
+      - "7. Boosting Developer Productivity": 07-developer-productivity.md
+      - "8. Administering Copilot: Plans, Policies & Safeguards": 08-administering-copilot.md
+  - "Part III — GH-600 track: Developing agentic AI systems":
+      - "9. Agent Architecture & SDLC Integration": 09-agent-architecture-sdlc.md
+      - "10. Tool Use & Environment Interaction (MCP)": 10-tool-use-and-mcp.md
+      - "11. Memory, State & Execution": 11-memory-state-execution.md
+      - "12. Evaluation, Error Analysis & Tuning": 12-evaluation-error-analysis-tuning.md
+      - "13. Multi-Agent Orchestration": 13-multi-agent-orchestration.md
+      - "14. Guardrails & Accountability": 14-guardrails-and-accountability.md
+  - "Part IV — Exam readiness":
+      - "15. GH-300 Exam Readiness": 15-gh-300-exam-readiness.md
+      - "16. GH-600 Exam Readiness": 16-gh-600-exam-readiness.md
+  - Annexes:
+      - "A. Glossary": 17-annexe-glossary.md
+      - "B. Product & feature reference": 18-annexe-product-reference.md
+      - "C. Objective-to-chapter map": 19-annexe-objective-map.md
+      - "D. Further resources": 20-annexe-further-resources.md

@@ -1,0 +1,27 @@
+# Python virtual environment (embeds absolute local paths — never commit)
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Generated site (published to gh-pages by CI, not committed to source)
+site/
+
+# Pandoc build output (EPUB/PDF, working manuscripts, diagram cache)
+output/
+
+# Node / mermaid-cli
+node_modules/
+
+# Downloaded ebook files injected at deploy time
+chapters/downloads/
+
+# Internal project tracking (Memory Bank + working plan + editorial charter + chapter template) — not for publication
+memory-bank/
+plan-ebook.md
+editorial-charter.md
+chapters/_chapter-template.md
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

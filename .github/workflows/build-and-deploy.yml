@@ -1,0 +1,118 @@
+# Builds the ebook (EPUB + PDF) with Pandoc and deploys the MkDocs web version to
+# GitHub Pages — as a single pipeline, since the site links to the freshly built files.
+#
+# Flow on a push to main:
+#   1. build-ebook : Pandoc/XeLaTeX/mermaid produce output/*.epub and *.pdf (uploaded as an artifact).
+#   2. deploy      : the artifacts are dropped into chapters/downloads/, then `mkdocs gh-deploy`
+#                    publishes the site (including the downloadable EPUB/PDF) to the gh-pages branch.
+#
+# Result: the published site always references the LATEST EPUB/PDF. Nothing is committed to main and
+# there are no per-version Releases — gh-pages is force-updated, so only the latest files are kept.
+#
+# The cover (assets/cover.png) is committed and embedded in the EPUB; it is generated locally with
+# build/make-cover.ps1 (GDI+, Windows-only) and not built in CI.
+#
+# In the repository: Settings -> Pages -> Source = "Deploy from a branch", Branch = gh-pages / root.
+
+name: Build & deploy (site + EPUB/PDF)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ----------------------------------------------------------------------------
+  # Validate the MkDocs site (fast) on every push and PR.
+  # ----------------------------------------------------------------------------
+  validate-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Strict build (validation only)
+        run: mkdocs build --strict
+
+  # ----------------------------------------------------------------------------
+  # Build the EPUB and PDF with Pandoc (also validates the ebook build on PRs).
+  # ----------------------------------------------------------------------------
+  build-ebook:
+    runs-on: ubuntu-24.04
+    env:
+      PANDOC_MAINFONT: "DejaVu Sans"
+      PANDOC_MONOFONT: "DejaVu Sans Mono"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Pandoc, XeLaTeX and fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended \
+            fonts-dejavu
+
+      - name: Install Chromium runtime libraries (for mermaid-cli)
+        run: |
+          sudo apt-get install -y --no-install-recommends \
+            libnss3 libnspr4 libatk1.0-0t64 libatk-bridge2.0-0t64 libcups2t64 libdrm2 \
+            libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 \
+            libpango-1.0-0 libcairo2 libasound2t64
+
+      - name: Install mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Build EPUB and PDF
+        run: pwsh -File build/build-pandoc.ps1
+
+      - name: Upload ebook artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ebook
+          path: |
+            output/*.epub
+            output/*.pdf
+          if-no-files-found: error
+
+  # ----------------------------------------------------------------------------
+  # Deploy the site + freshly built EPUB/PDF to GitHub Pages (main only).
+  # ----------------------------------------------------------------------------
+  deploy:
+    needs: [validate-site, build-ebook]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install -r requirements.txt
+
+      - name: Fetch built EPUB/PDF into the site
+        uses: actions/download-artifact@v4
+        with:
+          name: ebook
+          path: chapters/downloads
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force

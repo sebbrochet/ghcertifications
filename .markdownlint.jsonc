@@ -1,0 +1,24 @@
+{
+  // Markdownlint configuration for the "Copilot to Agents" ebook.
+  // Keep the useful rules; disable those that conflict with deliberate style choices.
+
+  // Long prose: no hard line-length limit.
+  "MD013": false,
+
+  // Emphasis used intentionally as a subheading:
+  //  - part subtitle (*Part X — ...*),
+  //  - exam-map line (**Exam map — ...**),
+  //  - bold lead-ins before a table or diagram.
+  "MD036": false,
+
+  // Consecutive callouts separated by a blank line
+  // (📌 Key concept, 🔍 How it works, ⚠️ Pitfall, 💡 Tip, 🖥️ Hands-on): intentional.
+  "MD028": false,
+
+  // The plan's table of contents uses real chapter numbers as list prefixes: intentional.
+  "MD029": false,
+
+  // Collapsible practice-question answers use <details>/<summary>: intentional and
+  // rendered by MkDocs and Pandoc/EPUB. Inline HTML is allowed by design.
+  "MD033": false
+}

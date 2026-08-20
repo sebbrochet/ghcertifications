@@ -1,0 +1,7 @@
+# Dependencies for the MkDocs web preview of "Copilot to Agents".
+# Install:
+#   python -m venv .venv
+#   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+# Preview:
+#   .\.venv\Scripts\python.exe -m mkdocs serve
+mkdocs-material>=9.5
