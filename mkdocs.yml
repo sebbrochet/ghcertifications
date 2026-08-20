@@ -1,7 +1,7 @@
 site_name: "Copilot to Agents"
 site_description: "The complete study guide to GitHub's AI developer certifications — GH-300 & GH-600"
 site_author: "Sébastien Brochet"
-site_url: "https://sebbrochet.github.io/ghcertifications/"
+site_url: "https://ghcertifications.sebbrochet.com/"
 
 # Chapters are the single source of truth: MkDocs reads chapters/ directly.
 docs_dir: chapters

@@ -6,8 +6,8 @@ Hands-on, grounded in official Microsoft Learn and GitHub documentation, and bui
 
 [![Build & deploy](https://github.com/sebbrochet/ghcertifications/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/sebbrochet/ghcertifications/actions/workflows/build-and-deploy.yml)
 
-- 🌐 **Read online:** https://sebbrochet.github.io/ghcertifications/
-- 📥 **Download (PDF & EPUB):** https://sebbrochet.github.io/ghcertifications/downloads/
+- 🌐 **Read online:** https://ghcertifications.sebbrochet.com/
+- 📥 **Download (PDF & EPUB):** https://ghcertifications.sebbrochet.com/downloads/
 
 ---
 
