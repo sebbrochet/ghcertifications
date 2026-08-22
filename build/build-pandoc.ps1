@@ -19,14 +19,15 @@
 
 param(
     [switch]$PdfOnly,
-    [switch]$EpubOnly
+    [switch]$EpubOnly,
+    [switch]$NoDiagrams
 )
 
 $buildDir    = $PSScriptRoot
 $projectRoot = Split-Path $PSScriptRoot -Parent
 $chapDir     = Join-Path $projectRoot 'chapters'
 $output      = Join-Path $projectRoot 'output'
-$assetsDir   = Join-Path $projectRoot 'assets'
+$assetsDir   = Join-Path $chapDir 'assets'
 
 if (-not (Test-Path $output)) { New-Item -ItemType Directory -Path $output -Force | Out-Null }
 
@@ -100,6 +101,10 @@ Write-Host "  Preparing working manuscripts..." -ForegroundColor Gray
 foreach ($file in $bookFiles) {
     $raw  = Get-Content $file -Raw -Encoding UTF8
     $leaf = Split-Path $file -Leaf
+    # The web edition shows the cover inline on the Introduction page (index.md). The EPUB and PDF
+    # already carry a dedicated cover (--epub-cover-image / full-page cover), so drop that inline
+    # image from the manuscripts to avoid a redundant duplicate.
+    $raw = [regex]::Replace($raw, '(?m)^[ \t]*!\[[^\]]*\]\(assets/cover[^)]*\.(?:png|jpg)\)[^\r\n]*\r?\n?', '')
     Set-Content -Path (Join-Path $epubManuscript $leaf) -Value $raw -Encoding UTF8 -NoNewline
     Set-Content -Path (Join-Path $pdfManuscript  $leaf) -Value (Remove-Emoji $raw) -Encoding UTF8 -NoNewline
 }
@@ -107,7 +112,10 @@ foreach ($file in $bookFiles) {
 # ============================================================
 # Render Mermaid diagrams to PNG (content-hash cache + parallel)
 # ============================================================
-$diagramCache = Join-Path $output 'diagram-cache'
+# Persistent, content-hashed diagram cache (kept under build/ so it survives cleaning of output/ —
+# re-renders only happen when a Mermaid block actually changes). Mermaid rendering via mmdc launches
+# a headless Chromium per diagram, so the cold run is slow; cached runs are near-instant.
+$diagramCache = Join-Path $buildDir '.diagram-cache'
 if (-not (Test-Path $diagramCache)) { New-Item -ItemType Directory -Path $diagramCache -Force | Out-Null }
 foreach ($d in @((Join-Path $epubManuscript 'diagrams'), (Join-Path $pdfManuscript 'diagrams'))) {
     if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }
@@ -124,7 +132,9 @@ function Get-DiagHash {
 $mmdc = Get-Command mmdc -ErrorAction SilentlyContinue
 $mermaidConfig = Join-Path $buildDir 'mermaid-config.json'
 
-if ($mmdc) {
+if ($NoDiagrams) {
+    Write-Host "  [SKIP] -NoDiagrams: Mermaid blocks left as code (fast text-only preview)." -ForegroundColor Yellow
+} elseif ($mmdc) {
     Write-Host "  Rendering Mermaid diagrams..." -ForegroundColor Gray
     $toRender = @()
     $total = 0
@@ -204,7 +214,8 @@ if (-not $PdfOnly) {
     Write-Host ""
     Write-Host "--- Building EPUB ---" -ForegroundColor Yellow
     $epubOut = Join-Path $output 'Copilot-to-Agents.epub'
-    $epubArgs = @('-o', $epubOut, '--split-level=1', "--resource-path=$epubManuscript")
+    # --mathml: render math as native EPUB3 MathML (proper fractions in e-readers).
+    $epubArgs = @('-o', $epubOut, '--split-level=1', '--mathml', "--resource-path=$epubManuscript")
     $cover = Join-Path $assetsDir 'cover.png'
     if (Test-Path $cover) {
         $epubArgs += "--epub-cover-image=$cover"
@@ -231,6 +242,26 @@ if (-not $EpubOnly) {
     } else {
         $pdfOut = Join-Path $output 'Copilot-to-Agents.pdf'
         $header = Join-Path $buildDir 'latex-header.tex'
+        # Full-bleed cover as PAGE 1 (eso-pic paints the cover as the first page's background at
+        # \AtBeginDocument, and Pandoc's text title page is suppressed — otherwise the title page
+        # is page 1 and the cover slips to page 2).
+        $cover = Join-Path $assetsDir 'cover.png'
+        $coverInclude = @()
+        if (Test-Path $cover) {
+            $coverHeader = Join-Path $output 'pdf-cover-header.tex'
+            $coverPath   = ($cover -replace '\\', '/')
+            @"
+\usepackage{eso-pic}
+\AtBeginDocument{%
+  \thispagestyle{empty}%
+  \AddToShipoutPictureBG*{\put(0,0){\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio=false]{$coverPath}}}%
+  \null\clearpage%
+}
+\renewcommand{\maketitle}{\thispagestyle{empty}}
+"@ | Set-Content -Path $coverHeader -Encoding UTF8
+            $coverInclude = @("--include-in-header=$coverHeader")
+            Write-Host "  [OK] Cover page (page 1) included" -ForegroundColor Green
+        }
         # Fonts are overridable for CI/Linux (Segoe UI / Consolas are Windows-only).
         # Set PANDOC_MAINFONT / PANDOC_MONOFONT to fonts installed on the runner (e.g. DejaVu).
         $mainFont = if ($env:PANDOC_MAINFONT) { $env:PANDOC_MAINFONT } else { 'Segoe UI' }
@@ -248,7 +279,7 @@ if (-not $EpubOnly) {
             '-V', 'urlcolor:NavyBlue'
             "--include-in-header=$header"
             "--resource-path=$pdfManuscript"
-        ) + $commonArgs + $pdfBookFiles
+        ) + $coverInclude + $commonArgs + $pdfBookFiles
         Write-Host "  Running pandoc (PDF, may take a minute)..." -ForegroundColor Gray
         & pandoc @pdfArgs 2>&1 | ForEach-Object {
             $l = "$_"

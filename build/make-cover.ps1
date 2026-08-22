@@ -1,5 +1,5 @@
 # make-cover.ps1
-# Generates assets/cover.png (1600 x 2560 px, KDP ratio 1.6) WITHOUT a browser,
+# Generates chapters/assets/cover.png (1600 x 2560 px, KDP ratio 1.6) WITHOUT a browser,
 # directly via System.Drawing (GDI+). Deterministic and portable.
 #
 # Palette "GitHub / Copilot": near-black background + blue + purple accents + gold,
@@ -10,7 +10,7 @@
 Add-Type -AssemblyName System.Drawing
 
 $projectRoot = Split-Path $PSScriptRoot -Parent
-$assetsDir   = Join-Path $projectRoot 'assets'
+$assetsDir   = Join-Path $projectRoot 'chapters\assets'
 if (-not (Test-Path $assetsDir)) { New-Item -ItemType Directory -Path $assetsDir -Force | Out-Null }
 $out = Join-Path $assetsDir 'cover.png'
 
@@ -147,5 +147,5 @@ $bmp.Save($out, [System.Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose(); $bmp.Dispose()
 
 $sz = [math]::Round((Get-Item $out).Length / 1KB, 0)
-Write-Host "[OK] Cover generated: assets/cover.png ($W x $H px, $sz KB)" -ForegroundColor Green
-Write-Host "     Automatically included in the EPUB by build-pandoc.ps1." -ForegroundColor Gray
+Write-Host "[OK] Cover generated: chapters/assets/cover.png ($W x $H px, $sz KB)" -ForegroundColor Green
+Write-Host "     Served by MkDocs (web) and embedded in the EPUB/PDF by build-pandoc.ps1." -ForegroundColor Gray

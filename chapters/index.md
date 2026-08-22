@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
 # Introduction
 
+![Copilot to Agents — book cover](assets/cover-web.jpg){ align=right width=240 loading=lazy }
+
 Artificial intelligence has moved from autocomplete to autonomy. In a few short years, GitHub Copilot went
 from suggesting the next line of code to reviewing pull requests, running in your terminal, and — most
 recently — operating as an **agent** that plans work, uses tools, and opens pull requests on its own. GitHub,

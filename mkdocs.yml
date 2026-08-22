@@ -13,7 +13,9 @@ exclude_docs: |
 
 theme:
   name: material
+  custom_dir: overrides
   language: en
+  favicon: assets/favicon.ico
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default

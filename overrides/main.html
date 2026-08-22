@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+<!--
+  Theme override: additional favicon sizes and the Apple touch icon.
+  Material sets the primary favicon from theme.favicon (assets/favicon.ico); these
+  extra <link> tags cover standard PNG sizes and iOS home-screen icons.
+  Assets live under chapters/assets/ (docs_dir) and are referenced with the `url` filter
+  so paths stay correct under the custom domain.
+-->
+{% block extrahead %}
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'assets/favicon-16.png' | url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-32.png' | url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ 'assets/favicon-192.png' | url }}">
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ 'assets/favicon-512.png' | url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/apple-touch-icon-180.png' | url }}">
+
+  <!-- Social / Open Graph preview image (1200x630 card) -->
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ config.site_url }}assets/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Copilot to Agents — study guide for GH-300 & GH-600">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ config.site_url }}assets/og-cover.jpg">
+{% endblock %}

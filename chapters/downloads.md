@@ -21,6 +21,3 @@ from the current sources on every update, so they always match the web version y
 
 > 💡 **Tip**: on the exam-readiness chapters, the mock-exam answers are collapsible in the web version
 > and inline in the EPUB/PDF — handy for self-testing on paper.
-
-> 🔗 The web edition and these downloads are published together from the same source on each push to
-> `main`.

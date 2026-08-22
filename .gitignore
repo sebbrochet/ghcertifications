@@ -13,6 +13,9 @@ output/
 # Node / mermaid-cli
 node_modules/
 
+# Mermaid diagram render cache (local, content-hashed; survives output/ cleaning)
+build/.diagram-cache/
+
 # Downloaded ebook files injected at deploy time
 chapters/downloads/
 

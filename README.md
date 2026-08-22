@@ -26,11 +26,12 @@ Every chapter follows a consistent anatomy (in 30 seconds → exam map → key c
 ## Repository layout
 
 ```text
-chapters/      Book content (Markdown) — the single source of truth
-build/         Pandoc export chain (EPUB/PDF), cover generator, Mermaid/LaTeX config
-assets/        Generated cover image
-.github/       CI: build EPUB/PDF + deploy the site to GitHub Pages
-mkdocs.yml     MkDocs Material configuration (web edition)
+chapters/         Book content (Markdown) — the single source of truth
+chapters/assets/  Cover (high-res master + web/OG derivatives) and favicons — served by MkDocs; master cover embedded in EPUB/PDF
+build/            Pandoc export chain (EPUB/PDF), cover generator, Mermaid/LaTeX config
+overrides/        MkDocs Material theme overrides (extra favicon links + social card)
+.github/          CI: build EPUB/PDF + deploy the site to GitHub Pages
+mkdocs.yml        MkDocs Material configuration (web edition)
 ```
 
 ## Read or build locally
@@ -45,12 +46,14 @@ python -m venv .venv
 
 Then open <http://127.0.0.1:8000>.
 
-**EPUB/PDF (Pandoc):** produced automatically by CI (see below). To build locally on a machine where Pandoc, `mermaid-cli`, and a LaTeX engine (XeLaTeX) are installed:
+**EPUB/PDF (Pandoc):** produced automatically by CI (see below). To generate them locally for previewing the two downloadable formats, run the one-command wrapper on a machine where Pandoc, `mermaid-cli`, and a LaTeX engine (XeLaTeX) are installed:
 
 ```powershell
-.\build\make-cover.ps1        # generate assets/cover.png (Windows/GDI+)
-.\build\build-pandoc.ps1      # EPUB (+ PDF if xelatex is available) -> output/
+.\build\build-local.ps1          # EPUB + PDF -> output/ (reuses the existing cover)
+.\build\build-local.ps1 -Open    # ...and open both files when done
 ```
+
+The deliverables land in the top-level `output/` folder (git-ignored). The build **reuses** the existing `chapters/assets/cover.png` — it is never regenerated unless you pass `-RegenerateCover` (which rebuilds a basic GDI+ placeholder). To rebuild only one format, use `-EpubOnly` / `-PdfOnly`.
 
 ## How it's published
 
